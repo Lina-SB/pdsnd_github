@@ -10,14 +10,7 @@ months = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
 day_of_week = ['all', 'monday', 'tuesday', 'wednesday', 'friday', 'saturday', 'sunday']
 
 def get_filters():
-    """
-    Asks user to specify a city, month, and day to analyze.
 
-    Returns:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
-    """
     print('Hello!  Are you intersted  in  bikeshare!!  Let\'s dig out  some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
@@ -25,82 +18,70 @@ def get_filters():
        if city not in CITY_DATA:
             print("\please...try agin!!\n")
             continue
-            
+
        else:
             print('\n Here we go>>\n')
             break
-            
-              
 
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
                try:
                  month = input("Which month do you want to know about!").lower()
                  if month in  months:
-                         break 
+                         break
                  else:
                     print('\n Try agin please...\just say \'all\' to apply no month filter\n')
                except ValueError:
                     print('"Oops!  \n Don\'t use numbers...  \just say \'all\' to apply no month filter\n')
                else:
-                    break  
+                    break
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     while True :
         try:
           day = input("Which day do you want to know about!").lower()
           if day in day_of_week:
-               break 
+               break
           else:
               print('\n Try agin please...\just say \'all\' to apply no day filter\n')
-   
+
         except ValueError:
              print('"Oops!  \n Don\'t use numbers...  \just say \'all\' to apply no day filter\n')
         else:
-            break  
+            break
 
     print('-'*40)
     return city, month, day
 
 
 def load_data(city, month, day):
-    """
-    Loads data for the specified city and filters by month and day if applicable.
 
-    Args:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
-    Returns:
-        df - Pandas DataFrame containing city data filtered by month and day
-    """
   # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
     # extract hour from the Start Time column to create an hour column
     df['hour'] = df['Start Time'].dt.hour
-                 
-                 
+
      # filter by month if applicable
     if month != 'all':
-        
+
         # use the index of the months list to get the corresponding int
        months = ['january', 'february', 'march', 'april', 'may', 'june']
        month = months.index(month) + 1
         # filter by month to create the new dataframe
        df = df[df['month']==month]
-        
+
       # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
-        df = df = df[df['day_of_week'] == day.title()]            
-                 
+        df = df = df[df['day_of_week'] == day.title()]
+
 
     return df
 
@@ -165,7 +146,7 @@ def trip_duration_stats(df):
 
     # TO DO: display mean travel time
     mean_travel = df['Trip Duration'].mean()
-    print(mean_travel) 
+    print(mean_travel)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -186,7 +167,7 @@ def user_stats(df):
         gender = df['Gender'].value_counts()
         print(gender)
     else:
-        print(" no gender information here.")   
+        print(" no gender information here.")
 
     # TO DO: Display earliest, most recent, and most common year of birth
     if 'Birth_Year' in df:
@@ -201,10 +182,9 @@ def user_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
-   
-#Display raw data on user request 
-   
+
+#Display raw data on user request
+
 def display_raw_data(df):
     """ display raw data for user request"""
     raw_data = 0
@@ -214,12 +194,11 @@ def display_raw_data(df):
             print(" Please type Yes or No.").lower()
          elif user_request == 'yes':
               raw_data += 5
-              print(df.iloc[raw_data : raw_data + 5]) 
+              print(df.iloc[raw_data : raw_data + 5])
          elif user_request== 'no':
-              return         
+              return
               print('-'*40)
-                   
-                
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -230,7 +209,7 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
         display_raw_data(df)
-        
+
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
