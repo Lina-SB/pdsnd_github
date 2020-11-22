@@ -9,6 +9,10 @@ months = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
 
 day_of_week = ['all', 'monday', 'tuesday', 'wednesday', 'friday', 'saturday', 'sunday']
 
+def printdur():
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)
+
 def get_filters():
 
     print('Hello!  Are you intersted  in  bikeshare!!  Let\'s dig out  some US bikeshare data!')
@@ -107,8 +111,7 @@ def time_stats(df):
     common_hour = df['hour'].mode()[0]
     print(common_hour)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    printdur()
 
 
 def station_stats(df):
@@ -130,8 +133,7 @@ def station_stats(df):
     common_combination = df['combination'].mode()[0]
     print(common_combination)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    printdur()
 
 
 def trip_duration_stats(df):
@@ -148,8 +150,7 @@ def trip_duration_stats(df):
     mean_travel = df['Trip Duration'].mean()
     print(mean_travel)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    printdur()
 
 
 def user_stats(df):
@@ -180,8 +181,7 @@ def user_stats(df):
     else:
      print(" no birth year information here.")
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    printdur()
 
 #Display raw data on user request
 
