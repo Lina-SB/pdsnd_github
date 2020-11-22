@@ -1,15 +1,16 @@
+
+## Bikeshare 
+
 ### Date created
 Include the date you created this project and README file.
 
-### Project Title
-Replace the Project Title
-
 ### Description
-Describe what your project is about and what it does
+this project is created to explore data related to bike share system for three major citties in USA, Chicago, new york city, washingaton
 
 ### Files used
-Include the files used
+chicago.csv
+new_york_city.csv
+washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+Udacity, programing for data science Nanodegree program.
